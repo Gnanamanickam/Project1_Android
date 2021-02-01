@@ -17,10 +17,10 @@ public class NameCheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_check);
 
-        Intent intent = getIntent();
-        String name = intent.getStringExtra(NameCheckActivity.ReadText);
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(name);
+//        Intent intent = getIntent();
+//        String name = intent.getStringExtra(NameCheckActivity.ReadText);
+//        TextView textView = findViewById(R.id.textView);
+//        textView.setText(name);
     }
 
     public void sendName(View view) {
