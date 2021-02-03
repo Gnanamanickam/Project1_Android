@@ -25,9 +25,9 @@ public class NameCheckActivity extends AppCompatActivity {
 
     public void sendName(View view) {
         Intent intent = new Intent(this, NameCheckActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String name = editText.getText().toString();
-        intent.putExtra(ReadText, name);
+//        EditText editText = (EditText) findViewById(R.id.editText);
+//        String name = editText.getText().toString();
+//        intent.putExtra(ReadText, name);
         startActivity(intent);
     }
 
