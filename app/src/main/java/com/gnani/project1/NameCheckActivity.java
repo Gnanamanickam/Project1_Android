@@ -2,33 +2,49 @@ package com.gnani.project1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class NameCheckActivity extends AppCompatActivity {
 
-    private static String ReadText = "ReadText";
+    private EditText name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_check);
+        name = (EditText) findViewById(R.id.enterName);
+        name.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId==KeyEvent.KEYCODE_ENTER || actionId== EditorInfo.IME_ACTION_DONE) {
+                    if(!name.getText().toString().isEmpty()){
 
-//        Intent intent = getIntent();
-//        String name = intent.getStringExtra(NameCheckActivity.ReadText);
-//        TextView textView = findViewById(R.id.textView);
-//        textView.setText(name);
+                        Intent validName = new Intent();
+                        validName.putExtra("name",name.getText().toString());
+                        setResult(Activity.RESULT_OK,validName);
+                        finish();
+                        return true;
+                    }
+                    else {
+
+                        Intent InvalidName = new Intent();
+                        InvalidName.putExtra("name",name.getText().toString());
+                        setResult(Activity.RESULT_CANCELED, InvalidName);
+                        finish();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
-    public void sendName(View view) {
-        Intent intent = new Intent(this, NameCheckActivity.class);
-//        EditText editText = (EditText) findViewById(R.id.editText);
-//        String name = editText.getText().toString();
-//        intent.putExtra(ReadText, name);
-        startActivity(intent);
-    }
 
 }
