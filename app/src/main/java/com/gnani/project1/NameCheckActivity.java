@@ -20,30 +20,32 @@ public class NameCheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_check);
         name = (EditText) findViewById(R.id.enterName);
-        name.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId==KeyEvent.KEYCODE_ENTER || actionId== EditorInfo.IME_ACTION_DONE) {
-                    if(!name.getText().toString().isEmpty()){
-
-                        Intent validName = new Intent();
-                        validName.putExtra("name",name.getText().toString());
-                        setResult(Activity.RESULT_OK,validName);
-                        finish();
-                        return true;
-                    }
-                    else {
-
-                        Intent InvalidName = new Intent();
-                        InvalidName.putExtra("name",name.getText().toString());
-                        setResult(Activity.RESULT_CANCELED, InvalidName);
-                        finish();
-                        return true;
-                    }
-                }
-                return false;
+        String enteredName = name.getText().toString();
+        Intent returnName = new Intent(this, MainActivity.class);
+        returnName.putExtra("name",name.getText().toString());
+        name.setOnClickListener(v -> {
+            if(enteredName.isEmpty()) {
+                setResult(Activity.RESULT_CANCELED, returnName);
             }
+            if(enteredName.split(" ").length > 1 && validator(enteredName)) {
+                    setResult(Activity.RESULT_OK, returnName);
+                }
+            else {
+                setResult(Activity.RESULT_CANCELED, returnName);
+            }
+            finish();
         });
+    }
+
+    public static boolean validator(String name) {
+        boolean value = true;
+        String split_name[] = name.split(" ");
+        for(int i=0;i < name.length(); i++) {
+            value = split_name[i].matches("([a-zA-z]{0,23})");
+            if(value == false)
+                return value;
+        }
+        return value;
     }
 
 
