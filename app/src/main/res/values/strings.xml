@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Project1</string>
     <string name="welcome">Welcome</string>
-    <string name="button1">Button one</string>
-    <string name="button2">Button two</string>
-    <string name="enter">Enter a person’s name</string>
-    <string name="enter_a_name">Enter name</string>
+    <string name="button1">Button 1</string>
+    <string name="button2">Button 2</string>
+    <string name="enter_name">Enter Full name</string>
 </resources>

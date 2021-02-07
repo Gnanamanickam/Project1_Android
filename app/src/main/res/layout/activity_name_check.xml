@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="50dp"
+    android:gravity="center"
     tools:context=".NameCheckActivity">
 
     <TextView
-        android:id="@+id/readOnly"
-        android:layout_width="335dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="136dp"
-        android:text="@string/enter"
-        android:textSize="18pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:text="@string/enter_name"
+        android:textSize="38sp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:id="@+id/enterName"
-        android:layout_width="354dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="376dp"
-        android:autofillHints=""
-        android:hint="@string/enter_a_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter name"
+        android:textSize="25sp"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="100dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
