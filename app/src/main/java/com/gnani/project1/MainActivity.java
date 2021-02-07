@@ -14,18 +14,21 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    private Button button1;
     private Button button2;
+
     String name;
+    private int requestCode;
+    private int resultCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button1);
+        button1 = findViewById(R.id.button1);
         Intent intent = new Intent(this, NameCheckActivity.class);
-        button.setOnClickListener(v -> startActivityForResult(intent, 1));
+        button1.setOnClickListener(v -> startActivityForResult(intent, 1));
 
     }
 
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 //                assert data != null;
                 name = data.getStringExtra("name");
                 System.out.println("name in activity" + name);
-//                button2.setOnClickListener(view -> Toast.makeText(MainActivity.this, "Incorrect name entered", Toast.LENGTH_LONG).show());
                 button2.setOnClickListener(view -> {
                     Intent openContacts = new Intent(ContactsContract.Intents.Insert.ACTION).setType(ContactsContract.RawContacts.CONTENT_TYPE);
                     openContacts.putExtra(ContactsContract.Intents.Insert.NAME, name);
@@ -48,10 +50,30 @@ public class MainActivity extends AppCompatActivity {
                     name = " ";
 
                 });
-            } else if (resultCode == Activity.RESULT_CANCELED && data == null) {
+            } else {
                 button2.setOnClickListener(view -> Toast.makeText(MainActivity.this, "Incorrect name entered", Toast.LENGTH_LONG).show());
             }
+            requestCode = 0;
+            data = null;
+            resultCode = RESULT_CANCELED;
+
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("requestCode", requestCode);
+        savedInstanceState.putInt("resultCode",resultCode);
+        savedInstanceState.putString("name", name);
+    }
+
+    @Override
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        requestCode = savedInstanceState.getInt("requestCode");
+        resultCode = savedInstanceState.getInt("resultCode");
+        name = savedInstanceState.getString("name");
     }
 }
